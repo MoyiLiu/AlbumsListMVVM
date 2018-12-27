@@ -56,8 +56,11 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    //RxJava
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
     implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+
+    implementation "com.google.code.gson:gson:$gson_version"
 
     testImplementation 'junit:junit:4.12'
 
