@@ -6,9 +6,13 @@ import com.moyiliu.albumslistmvvm.api.AlbumApi
 import com.moyiliu.albumslistmvvm.constant.BASE_URL
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -23,12 +27,23 @@ class NetworkDependencyProvider {
         GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
 
     @Provides
+    @AlbumServer
+    fun provideClient(): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+            .callTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(5,TimeUnit.SECONDS)
+            .build()
+
+    @Provides
     @Singleton
     @AlbumServer
-    fun provideRetrofit(gson: Gson): Retrofit =
+    fun provideRetrofit(gson: Gson, client: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(client)
             .build()
 
     @Provides
