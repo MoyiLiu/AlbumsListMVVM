@@ -4,6 +4,9 @@ import com.google.gson.GsonBuilder
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
+/**
+ * Serialisation and De-serialisation tests for [AlbumResponseModel]
+ */
 class AlbumResponseModelTest {
 
     private val gson by lazy { GsonBuilder().serializeNulls().create() }
