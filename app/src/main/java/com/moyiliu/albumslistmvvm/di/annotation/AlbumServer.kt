@@ -1,4 +1,4 @@
-package com.moyiliu.albumslistmvvm.di
+package com.moyiliu.albumslistmvvm.di.annotation
 
 import javax.inject.Qualifier
 

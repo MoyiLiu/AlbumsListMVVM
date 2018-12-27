@@ -2,6 +2,8 @@ package com.moyiliu.albumslistmvvm.di
 
 import android.app.Application
 import android.content.Context
+import com.moyiliu.albumslistmvvm.AlbumApplication
+import com.moyiliu.albumslistmvvm.domain.model.Album
 import dagger.Binds
 import dagger.Module
 
@@ -12,7 +14,8 @@ import dagger.Module
     includes = [
         AppDependencyBinder::class,
         DatabaseDependencyProvider::class,
-        NetworkDependencyProvider::class
+        NetworkDependencyProvider::class,
+        MainDependencyProvider::class
     ]
 )
 class AppDependencyProvider

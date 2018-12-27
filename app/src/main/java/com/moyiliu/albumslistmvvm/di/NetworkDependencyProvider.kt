@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import com.moyiliu.albumslistmvvm.BuildConfig
 import com.moyiliu.albumslistmvvm.api.AlbumApi
 import com.moyiliu.albumslistmvvm.constant.BASE_URL
+import com.moyiliu.albumslistmvvm.di.annotation.AlbumServer
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
