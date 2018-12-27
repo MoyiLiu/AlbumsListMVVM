@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(JUnit4::class)
 abstract class AlbumServerTest{
-    lateinit var mockServer: MockWebServer
+    private lateinit var mockServer: MockWebServer
     lateinit var retrofit: Retrofit
     private val gson by lazy { GsonBuilder().excludeFieldsWithoutExposeAnnotation().create() }
 

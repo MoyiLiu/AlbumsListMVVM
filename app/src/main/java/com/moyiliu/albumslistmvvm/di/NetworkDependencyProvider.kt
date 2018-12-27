@@ -2,6 +2,7 @@ package com.moyiliu.albumslistmvvm.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.moyiliu.albumslistmvvm.BuildConfig
 import com.moyiliu.albumslistmvvm.api.AlbumApi
 import com.moyiliu.albumslistmvvm.constant.BASE_URL
 import dagger.Module
@@ -30,9 +31,15 @@ class NetworkDependencyProvider {
     @AlbumServer
     fun provideClient(): OkHttpClient =
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
+            .apply {
+                if (BuildConfig.DEBUG)
+                    addInterceptor(
+                        HttpLoggingInterceptor()
+                            .apply { level = HttpLoggingInterceptor.Level.BODY }
+                    )
+            }
             .callTimeout(20, TimeUnit.SECONDS)
-            .connectTimeout(5,TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
             .build()
 
     @Provides
