@@ -13,20 +13,20 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/albumItemHeight"
-        app:cardCornerRadius="@dimen/cardViewCornerRadius"
-        android:layout_marginTop="@dimen/spacingSmall"
-        android:layout_marginBottom="@dimen/spacingSmall"
         android:layout_marginStart="@dimen/spacingDefault"
+        android:layout_marginTop="@dimen/spacingSmall"
         android:layout_marginEnd="@dimen/spacingDefault"
-        android:stateListAnimator="@drawable/elevate_anim_drawable"
+        android:layout_marginBottom="@dimen/spacingSmall"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:stateListAnimator="@drawable/elevate_anim_drawable"
+        app:cardCornerRadius="@dimen/cardViewCornerRadius">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@{album.title}"/>
+            android:text="@{album.title}" />
     </com.google.android.material.card.MaterialCardView>
 
 </layout>
