@@ -5,5 +5,5 @@ import androidx.lifecycle.LiveData
 interface ProgressViewModel {
     val progress: LiveData<Boolean>
     fun startProgress()
-    fun endProgress()
+    fun stopProgress()
 }

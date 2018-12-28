@@ -9,5 +9,5 @@ class ProgressViewModelDelegate : ProgressViewModel {
 
     override fun startProgress() { _progress.postValue(true) }
 
-    override fun endProgress() { _progress.postValue(false) }
+    override fun stopProgress() { _progress.postValue(false) }
 }
