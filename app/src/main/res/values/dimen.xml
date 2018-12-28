@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacingDefault">8dp</dimen>
+    <dimen name="spacingSmall">4dp</dimen>
+
+    <dimen name="albumItemHeight">50dp</dimen>
+    <dimen name="cardViewCornerRadius">8dp</dimen>
+</resources>
