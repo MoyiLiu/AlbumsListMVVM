@@ -25,7 +25,7 @@ abstract class BaseActivity(
 ) : AppCompatActivity() {
 
     /** Main navigation controller associated with this Activity. */
-    abstract val navController: NavController
+//    abstract val navController: NavController
 
     /**
      * Called when the activity is starting.
