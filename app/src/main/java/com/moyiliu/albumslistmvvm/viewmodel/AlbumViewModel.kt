@@ -6,10 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.moyiliu.albumslistmvvm.base.ProgressViewModel
 import com.moyiliu.albumslistmvvm.base.ProgressViewModelDelegate
 import com.moyiliu.albumslistmvvm.domain.model.Album
+import com.moyiliu.albumslistmvvm.domain.model.AlbumBindingModel
 import com.moyiliu.albumslistmvvm.domain.repository.AlbumRepository
 import com.moyiliu.albumslistmvvm.logging.error
 import com.moyiliu.albumslistmvvm.rx.MultiDisposable
 import com.moyiliu.albumslistmvvm.rx.MultiDisposableDelegate
+import io.reactivex.Single
 import javax.inject.Inject
 
 class AlbumViewModel @Inject constructor(
@@ -18,13 +20,16 @@ class AlbumViewModel @Inject constructor(
     ProgressViewModel by ProgressViewModelDelegate(),
     MultiDisposable by MultiDisposableDelegate() {
 
-    private val _albums = MutableLiveData<List<Album>>()
+    private val _albums = MutableLiveData<List<AlbumBindingModel>>()
 
-    val albums: LiveData<List<Album>> get() = _albums
+    val albums: LiveData<List<AlbumBindingModel>> get() = _albums
 
     init {
 
         repo.observeAlbums()
+            .map { albums ->
+                albums.map { album -> AlbumBindingModel(album) }
+            }
             .subscribe({ result ->
                 _albums.postValue(result)
             }, {
@@ -34,11 +39,15 @@ class AlbumViewModel @Inject constructor(
         repo.observeLoading()
             .subscribe({ loading ->
                 if (loading) startProgress()
-                else startProgress()
+                else stopProgress()
             }, {
                 error(it) { "Failed to observe loading." }
             }).addToDisposables()
 
+        repo.loadAlbums()
+    }
+
+    fun refreshAlbums(){
         repo.loadAlbums()
     }
 
