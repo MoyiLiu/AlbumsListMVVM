@@ -2,6 +2,7 @@ package com.moyiliu.albumslistmvvm.db
 
 import androidx.room.*
 import com.moyiliu.albumslistmvvm.domain.model.Album
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 
 /**
@@ -13,6 +14,10 @@ interface AlbumDao {
     /** Attempts to get all [Album]s. */
     @Query("SELECT * FROM album")
     fun getAlbums(): Maybe<List<Album>>
+
+    /** Attempts to observe album table modification. */
+    @Query("SELECT * FROM album")
+    fun observeAlbums(): Flowable<List<Album>>
 
     /** Attempts to get all [Album]s with ascending order of attribute title. */
     @Query("SELECT * FROM album ORDER BY title")
