@@ -24,4 +24,17 @@ class AlbumApiTest: AlbumServerTest() {
             .assertValue {it.isNotEmpty() }
             .assertValue { it.size == 8 }
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun fetchAlbums_checkFirstItemCorrect(){
+        enqueueResponse(responseFileName)
+        api.getAllAlbums()
+            .test()
+            .assertValue {albums->
+                albums[0].run {
+                    id == 1 && userId ==1 && title == "quidem molestiae enim"
+                }
+            }
+    }
 }
