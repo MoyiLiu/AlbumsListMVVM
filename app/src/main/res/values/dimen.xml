@@ -3,6 +3,6 @@
     <dimen name="spacingDefault">8dp</dimen>
     <dimen name="spacingSmall">4dp</dimen>
 
-    <dimen name="albumItemHeight">50dp</dimen>
+    <dimen name="albumItemHeight">70dp</dimen>
     <dimen name="cardViewCornerRadius">8dp</dimen>
 </resources>
