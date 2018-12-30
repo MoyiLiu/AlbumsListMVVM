@@ -16,8 +16,8 @@ interface AlbumDao {
     fun getAlbums(): Maybe<List<Album>>
 
     /** Attempts to observe album table modification. */
-    @Query("SELECT * FROM album")
-    fun observeAlbums(): Flowable<List<Album>>
+    @Query("SELECT * FROM album ORDER BY title")
+    fun observeAlbumsWithAscendingTitle(): Flowable<List<Album>>
 
     /** Attempts to get all [Album]s with ascending order of attribute title. */
     @Query("SELECT * FROM album ORDER BY title")
