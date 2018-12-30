@@ -14,7 +14,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.moyiliu.albumslistmvvm.AlbumTestRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -57,7 +57,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // optional - RxJava support for Room
+    //RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
 
     //Dagger 2
@@ -82,9 +82,14 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation "androidx.room:room-testing:$room_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation "androidx.test.ext:junit:1.1.0"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
+    kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
 
     androidTestImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 }
