@@ -44,9 +44,8 @@ class AlbumRepositoryImpl @Inject constructor(
     }
 
     override fun observeAlbums(): Flowable<List<Album>> =
-        albumDao.observeAlbums()
+        albumDao.observeAlbumsWithAscendingTitle()
             .subscribeOn(Schedulers.io())
-//        Flowable.just(emptyList())
 
     override fun observeLoading(): Observable<Boolean> =
         loadingSubject.subscribeOn(Schedulers.io())
