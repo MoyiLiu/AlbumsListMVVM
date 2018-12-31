@@ -1,12 +1,12 @@
 package com.moyiliu.albumslistmvvm.api
 
+import com.moyiliu.albumslistmvvm.FILE_NAME_ALBUM_RESPONSE_SUCCESSFUL
 import org.junit.Before
 import org.junit.Test
 import java.lang.Exception
 
 class AlbumApiTest: AlbumServerTest() {
 
-    private val responseFileName = "album-response.json"
 
     private lateinit var api : AlbumApi
 
@@ -18,7 +18,7 @@ class AlbumApiTest: AlbumServerTest() {
     @Test
     @Throws(Exception::class)
     fun getNonEmptyAlbums(){
-        enqueueResponse(responseFileName)
+        enqueueResponse(FILE_NAME_ALBUM_RESPONSE_SUCCESSFUL)
         api.getAllAlbums()
             .test()
             .assertValue {it.isNotEmpty() }
@@ -28,7 +28,7 @@ class AlbumApiTest: AlbumServerTest() {
     @Test
     @Throws(Exception::class)
     fun fetchAlbums_checkFirstItemCorrect(){
-        enqueueResponse(responseFileName)
+        enqueueResponse(FILE_NAME_ALBUM_RESPONSE_SUCCESSFUL)
         api.getAllAlbums()
             .test()
             .assertValue {albums->

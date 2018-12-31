@@ -1,6 +1,7 @@
 package com.moyiliu.albumslistmvvm.api
 
 import com.google.gson.GsonBuilder
+import com.moyiliu.albumslistmvvm.readMockApiResponse
 import io.reactivex.schedulers.Schedulers
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -14,13 +15,13 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @RunWith(JUnit4::class)
-abstract class AlbumServerTest{
+abstract class AlbumServerTest {
     private lateinit var mockServer: MockWebServer
     lateinit var retrofit: Retrofit
     private val gson by lazy { GsonBuilder().excludeFieldsWithoutExposeAnnotation().create() }
 
     @Before
-    fun setupServer(){
+    fun setupServer() {
         mockServer = MockWebServer()
         retrofit = Retrofit.Builder()
             .baseUrl(mockServer.url("/"))
@@ -30,22 +31,19 @@ abstract class AlbumServerTest{
     }
 
     @After
-    fun cleanupServer(){
+    fun cleanupServer() {
         mockServer.shutdown()
     }
 
     @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     protected fun enqueueResponse(fileName: String, headers: Map<String, String> = emptyMap()) {
-        val inputStream = javaClass.classLoader
-            .getResourceAsStream("api-response/$fileName")
-        val source = Okio.buffer(Okio.source(inputStream))
         val mockResponse = MockResponse()
         for ((key, value) in headers) {
             mockResponse.addHeader(key, value)
         }
         mockServer.enqueue(
             mockResponse
-                .setBody(source.readString(Charsets.UTF_8))
+                .setBody(readMockApiResponse(fileName))
         )
     }
 }
