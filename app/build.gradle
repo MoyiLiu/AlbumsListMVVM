@@ -34,6 +34,13 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        androidTest.resources.srcDirs +="src/test-common/resources"
+
+        test.java.srcDirs += "src/test-common/java"
+        test.resources.srcDirs +="src/test-common/resources"
+    }
 }
 
 dependencies {
