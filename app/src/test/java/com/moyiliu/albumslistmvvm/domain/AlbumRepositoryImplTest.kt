@@ -41,7 +41,7 @@ class AlbumRepositoryImplTest {
     @Throws(Exception::class)
     fun loadAlbums_insertLoadedAlbumsToDatabase() {
         `when`(proxy.fetchAlbums())
-            .thenReturn(Single.just(listOf(ALBUM_RES_1, ALBUM_RES_2)))
+            .thenReturn(Single.just(listOf(ALBUM_1, ALBUM_2)))
 
         repo.loadAlbums()
 
@@ -78,9 +78,6 @@ class AlbumRepositoryImplTest {
     }
 
     private companion object {
-        val ALBUM_RES_1 = AlbumResponseModel(userId = 1, id = 1, title = "album_1")
-        val ALBUM_RES_2 = AlbumResponseModel(userId = 2, id = 2, title = "album_2")
-
         val ALBUM_1 = Album(userId = 1, id = 1, title = "album_1")
         val ALBUM_2 = Album(userId = 2, id = 2, title = "album_2")
     }

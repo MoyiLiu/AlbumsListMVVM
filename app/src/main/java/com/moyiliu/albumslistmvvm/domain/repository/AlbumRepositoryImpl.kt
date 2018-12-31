@@ -28,11 +28,6 @@ class AlbumRepositoryImpl @Inject constructor(
     @SuppressLint("CheckResult")
     override fun loadAlbums() {
         albumProxy.fetchAlbums()
-            .map { albumResponseModelList ->
-                albumResponseModelList.map { responseItem ->
-                    responseItem.toAlbum()
-                }
-            }
             .observeOn(Schedulers.io())
             .doOnSubscribe { loadingSubject.onNext(true) }
             .doAfterTerminate { loadingSubject.onNext(false) }
@@ -49,7 +44,4 @@ class AlbumRepositoryImpl @Inject constructor(
 
     override fun observeLoading(): Observable<Boolean> =
         loadingSubject.subscribeOn(Schedulers.io())
-
-    private fun AlbumResponseModel.toAlbum(): Album = Album(id = id, userId = userId, title = title)
-
 }

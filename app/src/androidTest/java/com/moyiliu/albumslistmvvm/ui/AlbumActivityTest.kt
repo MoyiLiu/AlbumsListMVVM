@@ -23,7 +23,7 @@ class AlbumActivityTest {
     @Test
     fun loadAlbum_matchFirstItem() {
         onView(withRecyclerView(R.id.albumRecyclerView).atPositionOnView(0, R.id.albumItemTitle))
-            .check(matches(withText("eaque aut omnis a")))
+            .check(matches(withText(EXPECTED_FIRST_ITEM_TITLE)))
     }
 
     @Test
@@ -32,7 +32,7 @@ class AlbumActivityTest {
         rotateScreen()
 
         onView(withRecyclerView(R.id.albumRecyclerView).atPositionOnView(0, R.id.albumItemTitle))
-            .check(matches(withText("eaque aut omnis a")))
+            .check(matches(withText(EXPECTED_FIRST_ITEM_TITLE)))
     }
 
     private fun rotateScreen() {
@@ -45,5 +45,9 @@ class AlbumActivityTest {
                     ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 else
                     ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    private companion object {
+        const val EXPECTED_FIRST_ITEM_TITLE = "eaque aut omnis a"
     }
 }
