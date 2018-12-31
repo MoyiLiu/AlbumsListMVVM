@@ -13,16 +13,16 @@ import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 @Module
-abstract class AlbumDependencyModule{
+interface AlbumDependencyModule{
     @Binds
     @Singleton
-    abstract fun provideAlbumProxy(proxy: AlbumProxyImpl): AlbumProxy
+    fun bindAlbumProxy(proxy: AlbumProxyImpl): AlbumProxy
 
     @Binds
-    abstract fun provideAlbumRepo(repo: AlbumRepositoryImpl): AlbumRepository
+    fun bindAlbumRepo(repo: AlbumRepositoryImpl): AlbumRepository
 
     @Binds
     @IntoMap
     @ViewModelMapKey(AlbumViewModel::class)
-    abstract fun bindAlbumViewModel(viewModel: AlbumViewModel): ViewModel
+    fun bindAlbumViewModel(viewModel: AlbumViewModel): ViewModel
 }

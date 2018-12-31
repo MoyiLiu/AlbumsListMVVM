@@ -11,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import com.moyiliu.albumslistmvvm.R
 import dagger.android.AndroidInjection
 
 /**
@@ -20,12 +22,7 @@ import dagger.android.AndroidInjection
  * @property withActionBar Indicates whether this activity uses its own `ActionBar`
  * and therefore should not use `ActionBar` provided by fragments.
  */
-abstract class BaseActivity(
-    internal val withActionBar: Boolean = false
-) : AppCompatActivity() {
-
-    /** Main navigation controller associated with this Activity. */
-//    abstract val navController: NavController
+abstract class BaseActivity: AppCompatActivity() {
 
     /**
      * Called when the activity is starting.
@@ -62,43 +59,4 @@ abstract class BaseActivity(
                 init()
                 setLifecycleOwner(this@BaseActivity)
             }
-
-    /**
-     * Sets a `Toolbar` with the given [toolbarId], defined in a fragment,
-     * to act as the `ActionBar` for this Activity window.
-     *
-     * If [withActionBar] is set to `true`, this method will do nothing.
-     *
-     * @param toolbarId Id of the `Toolbar` to act as `ActionBar`.
-     * Pass `null` to remove the currently set `ActionBar`.
-     * @param init A function initializing the `ActionBar`.
-     */
-    fun setFragmentActionBar(@IdRes toolbarId: Int?, init: ActionBar.() -> Unit = {}) {
-        if (withActionBar) {
-            toolbarId?.let { findViewById<View>(it) }?.visibility = View.GONE
-        } else {
-            setSupportActionBar(toolbarId)
-            supportActionBar?.init()
-        }
-    }
-
-    /**
-     * Sets a `Toolbar` with the given [toolbarId] to act as the `ActionBar`
-     * for this Activity window.
-     *
-     * @param toolbarId Id of the `Toolbar` to act as `ActionBar`.
-     * Pass `null` to remove the currently set `ActionBar`.
-     */
-    fun setSupportActionBar(@IdRes toolbarId: Int?) {
-        setSupportActionBar(toolbarId?.let { findViewById<Toolbar>(it) })
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
-        when (item?.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
 }
