@@ -10,6 +10,7 @@ import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,6 +29,12 @@ class AlbumRepositoryImplTest {
     fun setup() {
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
+    }
+
+    @After
+    fun clear(){
+        RxJavaPlugins.reset()
+        RxAndroidPlugins.reset()
     }
 
     @Test
