@@ -1,5 +1,5 @@
 # AlbumsListMVVM
-This project is over-engineered due to demonstration purpose. It is implemented in MVVM architecture. It is divided into 5 layers:
+This project is over-engineered due to demonstrative purpose. It is implemented in MVVM architecture and divided into 5 layers:
 * **_View_** – it is designed to use multiple-activity approach, alternative choice is discussed in potential improvement section.
 * **_ViewModel_** – by using Android Lifecycle components, which eases the data persistence with Activity lifecycle and the implementation of reactive programming. e.g. ViewModel, LiveData, Lifecycle.
 * **_Domain_** – handles the business logic, usually contains **Repository** (Database, SharedPreference or remote resource represented by proxy) and **Service** (for user actions in terms of business logic, not required in this project).
