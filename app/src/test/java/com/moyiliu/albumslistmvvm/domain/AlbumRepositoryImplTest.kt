@@ -44,6 +44,7 @@ class AlbumRepositoryImplTest {
             .thenReturn(Single.just(listOf(ALBUM_1, ALBUM_2)))
 
         repo.loadAlbums()
+            .subscribe()
 
         verify(dao).insertAlbums(ALBUM_1, ALBUM_2)
     }
@@ -58,6 +59,7 @@ class AlbumRepositoryImplTest {
         val testObserver = repo.observeLoading().test()
 
         repo.loadAlbums()
+            .subscribe()
 
         testObserver
             .assertValueAt(0, false) //Initial value

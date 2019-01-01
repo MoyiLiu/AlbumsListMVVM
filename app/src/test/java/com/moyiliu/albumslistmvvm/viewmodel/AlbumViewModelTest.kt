@@ -7,6 +7,7 @@ import com.moyiliu.albumslistmvvm.domain.model.Album
 import com.moyiliu.albumslistmvvm.domain.model.AlbumBindingModel
 import com.moyiliu.albumslistmvvm.domain.repository.AlbumRepository
 import com.moyiliu.albumslistmvvm.mock
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import junit.framework.Assert.assertEquals
@@ -37,6 +38,8 @@ class AlbumViewModelTest {
                 it.onNext(false)
             })
 
+        `when`(repo.loadAlbums())
+            .thenReturn(Completable.complete())
     }
 
     @Test
