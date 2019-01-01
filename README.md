@@ -3,7 +3,7 @@ This project is over-engineered due to demonstrative purpose. It is implemented 
 * **_View_** – it is designed to use multiple-activity approach, alternative choice is discussed in potential improvement section.
 * **_ViewModel_** – by using Android Lifecycle components, which eases the data persistence with Activity lifecycle and the implementation of reactive programming. e.g. ViewModel, LiveData, Lifecycle.
 * **_Domain_** – handles the business logic, usually contains **Repository** (Database, SharedPreference or remote resource represented by proxy) and **Service** (for user actions in terms of business logic, not required in this project).
-* **_Proxy_** – parses and prepares the data between domain layer and backend. In this project, `AlbumResponseModel` is almost identical to `Album` model. However, in a real life project, which can get much more complicated; for example, a backend may be responsible for multiple Applications, the response from which may contain many noise attributes, proxy in this case can be a filter and then pass the filtered data stream to domain.
+* **_Proxy_** – parses and prepares the data between the domain layer and the backend. In this project, `AlbumResponseModel` is almost identical to `Album` model. However, in a real life project, which can get much more complicated; for example, an endpoint may be responsible for multiple applications, the response from which may contain many noise attributes, proxy in this case can be a filter and then pass the filtered data stream to domain.
 * **_Network_** – fetches raw data from the remote repository.
 
 ### Potential Improvements:
