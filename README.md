@@ -6,7 +6,7 @@ This project is over-engineered due to demonstrative purpose. It is implemented 
 * **_Proxy_** – parses and prepares the data between domain layer and backend. In this project, `AlbumResponseModel` is almost identical to `Album` model. However, in a real life project, which can get much more complicated; for example, a backend may be responsible for multiple Applications, the response from which may contain many noise attributes, proxy in this case can be a filter and then pass the filtered data stream to domain.
 * **_Network_** – fetches raw data from the remote repository.
 
-##### Potential Improvements:
+### Potential Improvements:
 * Use one-activity-multiple-fragment with Navigation Component
   - _Pro_ – easy modularisation, easy user journey management
   - _Con_ – Navigation Component library is still in alpha, unstable
