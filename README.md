@@ -15,5 +15,5 @@ In this project, a separate Dependency Graph is created which altered proxy and 
 Alternatively, Dagger could be disabled for instrumentation testing and mock ViewModels and Domain layers with Mockito in each individual AndroidTest class.
 	- _Pro_ – each test class is decoupled from the whole project, less maintenance overhead
 	- _Con_ – lose the opportunity of testing business logic with instrumentation test, much more and duplicated stub work in each test class, time consuming
-* Implement Snackbar to display error message.
+* Implement better unhappy path handling structure in order to display more specified error message to improve UX.
 * Implement network state change listener to provide user with network state error, such as losing connection.
