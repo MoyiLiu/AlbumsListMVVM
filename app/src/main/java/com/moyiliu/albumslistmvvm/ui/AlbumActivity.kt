@@ -11,6 +11,7 @@ import com.moyiliu.albumslistmvvm.base.ViewModelFactory
 import com.moyiliu.albumslistmvvm.base.viewModel
 import com.moyiliu.albumslistmvvm.databinding.AlbumActivityBinding
 import com.moyiliu.albumslistmvvm.lifecycle.observe
+import com.moyiliu.albumslistmvvm.viewmodel.AlbumErrorEvent
 import com.moyiliu.albumslistmvvm.viewmodel.AlbumViewModel
 import kotlinx.android.synthetic.main.album_activity.*
 import javax.inject.Inject
@@ -41,9 +42,15 @@ class AlbumActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
         viewModel.albums.observe(this){
             adapter.dataList = it
         }
+
+        viewModel.errorEvent.observe(this){event->
+            if(event == AlbumErrorEvent.ERROR){
+                showSnackBar(getString(R.string.album_fetch_error),R.id.albumActivityConstraintLayout)
+            }
+        }
     }
 
     override fun onRefresh() {
-        viewModel.refreshAlbums()
+        viewModel.loadAlbums()
     }
 }

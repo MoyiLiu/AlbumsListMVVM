@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AlbumsListMVVM</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="album_fetch_error">Unable to fetch Albums. Please try again later.</string>
 </resources>

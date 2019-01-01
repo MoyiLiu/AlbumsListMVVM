@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import com.google.android.material.snackbar.Snackbar
 import com.moyiliu.albumslistmvvm.R
 import dagger.android.AndroidInjection
 
@@ -22,7 +23,7 @@ import dagger.android.AndroidInjection
  * @property withActionBar Indicates whether this activity uses its own `ActionBar`
  * and therefore should not use `ActionBar` provided by fragments.
  */
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     /**
      * Called when the activity is starting.
@@ -59,4 +60,15 @@ abstract class BaseActivity: AppCompatActivity() {
                 init()
                 setLifecycleOwner(this@BaseActivity)
             }
+
+    protected fun showSnackBar(message: String, layoutId: Int) {
+        findViewById<View>(layoutId)?.also { view ->
+            Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE)
+                .apply {
+                    setAction(getString(R.string.dismiss)) {
+                        dismiss()
+                    }
+                }.show()
+        }
+    }
 }

@@ -1,11 +1,10 @@
 package com.moyiliu.albumslistmvvm.domain.repository
 
 import android.annotation.SuppressLint
-import com.moyiliu.albumslistmvvm.api.model.AlbumResponseModel
 import com.moyiliu.albumslistmvvm.db.AlbumDao
 import com.moyiliu.albumslistmvvm.domain.model.Album
-import com.moyiliu.albumslistmvvm.logging.error
 import com.moyiliu.albumslistmvvm.proxy.AlbumProxy
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -25,18 +24,16 @@ class AlbumRepositoryImpl @Inject constructor(
      * The presentation level (Album list in RecyclerView) would always
      * react on the data in the database.
      */
-    @SuppressLint("CheckResult")
-    override fun loadAlbums() {
+    override fun loadAlbums(): Completable =
         albumProxy.fetchAlbums()
+            .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .doOnSubscribe { loadingSubject.onNext(true) }
             .doAfterTerminate { loadingSubject.onNext(false) }
-            .subscribe({ albums ->
+            .flatMapCompletable { albums ->
                 albumDao.insertAlbums(*albums.toTypedArray())
-            }, {
-                error(it) { "Unable to fetch albums from remote resource." }
-            })
-    }
+                Completable.complete()
+            }
 
     override fun observeAlbums(): Flowable<List<Album>> =
         albumDao.observeAlbumsWithAscendingTitle()

@@ -7,6 +7,7 @@ import com.moyiliu.albumslistmvvm.base.ProgressViewModel
 import com.moyiliu.albumslistmvvm.base.ProgressViewModelDelegate
 import com.moyiliu.albumslistmvvm.domain.model.AlbumBindingModel
 import com.moyiliu.albumslistmvvm.domain.repository.AlbumRepository
+import com.moyiliu.albumslistmvvm.lifecycle.EventLiveData
 import com.moyiliu.albumslistmvvm.logging.error
 import com.moyiliu.albumslistmvvm.rx.MultiDisposable
 import com.moyiliu.albumslistmvvm.rx.MultiDisposableDelegate
@@ -19,8 +20,12 @@ class AlbumViewModel @Inject constructor(
     MultiDisposable by MultiDisposableDelegate() {
 
     private val _albums = MutableLiveData<List<AlbumBindingModel>>()
+    private val _errorEvent = EventLiveData<AlbumErrorEvent>()
 
     val albums: LiveData<List<AlbumBindingModel>> get() = _albums
+    val errorEvent: LiveData<AlbumErrorEvent>
+        get() = _errorEvent
+
 
     init {
         repo.observeLoading()
@@ -41,15 +46,23 @@ class AlbumViewModel @Inject constructor(
                 error(it) { "Failed to observe albums." }
             }).addToDisposables()
 
-        repo.loadAlbums()
+        loadAlbums()
     }
 
-    fun refreshAlbums(){
+    fun loadAlbums() {
         repo.loadAlbums()
+            .subscribe({}, {
+                error(it) { "Load albums failed." }
+                _errorEvent.postValue(AlbumErrorEvent.ERROR)
+            }).addToDisposables()
     }
 
     override fun onCleared() {
         super.onCleared()
         dispose()
     }
+}
+
+enum class AlbumErrorEvent {
+    ERROR
 }
