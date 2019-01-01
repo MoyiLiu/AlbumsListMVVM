@@ -1,6 +1,5 @@
 package com.moyiliu.albumslistmvvm.domain.repository
 
-import android.annotation.SuppressLint
 import com.moyiliu.albumslistmvvm.db.AlbumDao
 import com.moyiliu.albumslistmvvm.domain.model.Album
 import com.moyiliu.albumslistmvvm.proxy.AlbumProxy
@@ -18,12 +17,6 @@ class AlbumRepositoryImpl @Inject constructor(
 
     private val loadingSubject = BehaviorSubject.createDefault(false)
 
-    /**
-     * Ignoring disposable for fetching albums from remote resource,
-     * due to the latest data should always be written to the database.
-     * The presentation level (Album list in RecyclerView) would always
-     * react on the data in the database.
-     */
     override fun loadAlbums(): Completable =
         albumProxy.fetchAlbums()
             .subscribeOn(Schedulers.io())
