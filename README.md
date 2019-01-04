@@ -12,3 +12,7 @@ This project is over-engineered due to demonstrative purpose. It is implemented 
   - _Con_ – Navigation Component library is still in alpha, unstable
 * Implement better unhappy path handling structure in order to display more specified error message to improve UX.
 * Implement network state change listener to provide user with network state error, such as losing connection.
+
+##### A separate instrumentation test strategy is implemented by creating a separate dependency graph, which is NOT recommended by the project creator.
+- The main drawback is that lack of dynamic controls in testing. For instance, it would be extremely inconvenient to create an unhappy path (proxy returns error) while there's already a happy path (proxy returns expected data) in the dependency graph.
+- For demonstration, check branch `separate_dependency_graph_instrumentation_test_strategy`.
