@@ -20,7 +20,10 @@ class AlbumActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModel by viewModel<AlbumViewModel> { viewModelFactory }
+    val viewModel by lazy {
+        viewModelFactory.create(AlbumViewModel::class.java)
+    }
+//    viewModel<AlbumViewModel> { viewModelFactory }
 
     private val adapter = BaseAdapter()
 
@@ -48,6 +51,8 @@ class AlbumActivity : BaseActivity(), SwipeRefreshLayout.OnRefreshListener {
                 showSnackBar(getString(R.string.album_fetch_error),R.id.albumActivityConstraintLayout)
             }
         }
+
+        viewModel.init()
     }
 
     override fun onRefresh() {

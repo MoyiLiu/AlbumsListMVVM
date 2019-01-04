@@ -38,7 +38,7 @@ class AlbumViewModel @Inject constructor(
         get() = _errorEvent
 
 
-    init {
+    fun init() {
         repo.observeLoading()
             .subscribe({ loading ->
                 if (loading) startProgress()

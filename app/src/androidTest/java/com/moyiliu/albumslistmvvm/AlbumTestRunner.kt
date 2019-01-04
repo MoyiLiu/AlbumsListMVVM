@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.test.runner.AndroidJUnitRunner
 
 /**
- * Custom runner to re-define dependency graph for testing.
+ * Custom runner to specify the [Application] to run.
  */
 class AlbumTestRunner : AndroidJUnitRunner() {
     override fun newApplication(cl: ClassLoader, className: String, context: Context): Application {

@@ -45,7 +45,7 @@ class AlbumViewModelTest {
     @Test
     @Throws(Exception::class)
     fun initialisation() {
-        AlbumViewModel(repo)
+        AlbumViewModel(repo).init()
         val inOrder = inOrder(repo)
 
         inOrder.apply {
@@ -62,7 +62,7 @@ class AlbumViewModelTest {
 
         val captor = argumentCaptor<List<AlbumBindingModel>>()
 
-        val viewModel = AlbumViewModel(repo)
+        val viewModel = AlbumViewModel(repo).apply { init() }
 
         viewModel.albums.observeForever(observer)
 

@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import com.google.android.material.snackbar.Snackbar
 import com.moyiliu.albumslistmvvm.R
 import dagger.android.AndroidInjection
+import dagger.android.HasActivityInjector
 
 /**
  * Base implementation for all activities in the application.
@@ -36,7 +37,10 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    private fun injectDependencies() = AndroidInjection.inject(this)
+    private fun injectDependencies() {
+        if (applicationContext is HasActivityInjector)
+            AndroidInjection.inject(this)
+    }
 
     /**
      * Returns data binding of type [T], initialized with the given [layout]
