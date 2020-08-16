@@ -10,9 +10,7 @@ pipeline {
         }
         stage('Cleanup') {
             steps {
-                script {
-                    sh './gradlew clean'
-                }
+                cleanWs()
             }
         }
     }
